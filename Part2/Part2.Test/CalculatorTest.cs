@@ -10,12 +10,11 @@ public class Tests
     }
 
     [TestCase(1,2,"+",ExpectedResult = 3)]
-    [TestCase(1,2,"other operation",ExpectedResult = 0)]
     [TestCase(1,Double.NaN,"+",ExpectedResult = Double.NaN)]
     [TestCase(1,Double.PositiveInfinity,"+",ExpectedResult = Double.PositiveInfinity)]
     [TestCase(1,Double.NegativeInfinity,"+",ExpectedResult = Double.NegativeInfinity)]
     [TestCase(0,Double.Epsilon,"+",ExpectedResult = Double.Epsilon)]
-    public double CalculatorCalculateAddTestShouldExpectedValue(double a, double b,string operation)
+    public double CalculatorAddTestShouldExpectedValue(double a, double b,string operation)
     {
         Calculator cal=new Calculator(a,b,operation);
         return cal.Calculate();
@@ -26,7 +25,7 @@ public class Tests
     [TestCase(1,Double.PositiveInfinity,"-",ExpectedResult = Double.NegativeInfinity)]
     [TestCase(1,Double.NegativeInfinity,"-",ExpectedResult = Double.PositiveInfinity)]
     [TestCase(0,Double.Epsilon,"-",ExpectedResult = -Double.Epsilon)]
-    public double CalculatorCalculateSubtractTestShouldExpectedValue(double a, double b,string operation)
+    public double CalculatorSubtractTestShouldExpectedValue(double a, double b,string operation)
     {
         Calculator cal=new Calculator(a,b,operation);
         return cal.Calculate();
@@ -36,8 +35,8 @@ public class Tests
     [TestCase(1,Double.NaN,"*",ExpectedResult = Double.NaN)]
     [TestCase(1,Double.PositiveInfinity,"*",ExpectedResult = Double.PositiveInfinity)]
     [TestCase(1,Double.NegativeInfinity,"*",ExpectedResult = Double.NegativeInfinity)]
-    [TestCase(0,Double.Epsilon,"*",ExpectedResult = Double.Epsilon)]
-    public double CalculatorCalculateMultiplyTestShouldExpectedValue(double a, double b,string operation)
+    [TestCase(0,Double.Epsilon,"*",ExpectedResult = 0)]
+    public double CalculatorMultiplyTestShouldExpectedValue(double a, double b,string operation)
     {
         Calculator cal=new Calculator(a,b,operation);
         return cal.Calculate();
@@ -46,10 +45,10 @@ public class Tests
    
     [TestCase(1,2,"/",ExpectedResult = 0.5)]
     [TestCase(1,Double.NaN,"/",ExpectedResult = Double.NaN)]
-    [TestCase(1,Double.PositiveInfinity,"/",ExpectedResult = Double.PositiveInfinity)]
-    [TestCase(1,Double.NegativeInfinity,"/",ExpectedResult = Double.NegativeInfinity)]
-    [TestCase(0,Double.Epsilon,"/",ExpectedResult = Double.Epsilon)]
-    public double CalculatorCalculateDivideTestShouldExpectedValue(double a, double b,string operation)
+    [TestCase(1,Double.PositiveInfinity,"/",ExpectedResult = 0)]
+    [TestCase(1,Double.NegativeInfinity,"/",ExpectedResult = -0)]
+    [TestCase(0,Double.Epsilon,"/",ExpectedResult = 0)]
+    public double CalculatorDivideTestShouldExpectedValue(double a, double b,string operation)
     {
         Calculator cal=new Calculator(a,b,operation);
         return cal.Calculate();
@@ -60,5 +59,12 @@ public class Tests
     {
         Calculator cal=new Calculator(0,0,"/");
         Assert.Throws<DivideByZeroException>(() => { cal.Calculate(); });
+    }
+
+    [Test]
+    public void CalculatorInvalidOperationShouldThrow()
+    {
+        Calculator cal=new Calculator(0,0,null);
+        Assert.Throws<ArgumentException>(() => { cal.Calculate(); });
     }
 }

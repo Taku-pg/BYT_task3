@@ -25,9 +25,9 @@ public class Calculator
                 return A * B;
             case "/":
                 if (B!=0) return (double)A / B;
-                throw new DivideByZeroException();
+                throw new DivideByZeroException("Division by zero");
             default:
-                return 0;
+                throw new ArgumentException("Invalid operation");
         }
     }
     
