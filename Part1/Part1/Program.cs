@@ -1,8 +1,7 @@
-﻿// Create a Sphere with radius 5
+﻿using Part1;
 
-using Part1;
-
-IShape sphere = new Sphere(Double.NegativeInfinity);
+// Create a Sphere with radius 5
+IShape sphere = new Sphere(5);
 Console.WriteLine("Sphere:");
 Console.WriteLine($"Area: {sphere.CalculateArea():F3}");
 Console.WriteLine($"Volume: {sphere.CalculateVolume():F3}");
