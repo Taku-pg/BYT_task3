@@ -67,7 +67,7 @@ public class Tests
     [Test]
     public void CalculatorNullOperationShouldThrow()
     {
-        Calculator cal=new Calculator(0,0,null);
+        Calculator cal=new Calculator(0,0,null!);
         Assert.Throws<ArgumentException>(() => { cal.Calculate(); });
     }
 }
