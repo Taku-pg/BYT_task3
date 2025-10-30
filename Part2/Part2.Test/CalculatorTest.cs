@@ -2,13 +2,6 @@ namespace Part2.Test;
 
 public class Tests
 {
-    
-    [SetUp]
-    public void Setup()
-    {
-        
-    }
-
     [TestCase(1,2,"+",ExpectedResult = 3)]
     [TestCase(1,Double.NaN,"+",ExpectedResult = Double.NaN)]
     [TestCase(1,Double.PositiveInfinity,"+",ExpectedResult = Double.PositiveInfinity)]
@@ -61,8 +54,18 @@ public class Tests
         Assert.Throws<DivideByZeroException>(() => { cal.Calculate(); });
     }
 
+    [TestCase("%")]
+    [TestCase("x")]
+    [TestCase("無効な演算子です")]
+    [TestCase("")]
+    public void CalculatorInvalidOperationShouldThrow(string operation)
+    {
+        Calculator cal=new Calculator(0,0,operation);
+        Assert.Throws<ArgumentException>(() => { cal.Calculate(); });
+    }
+
     [Test]
-    public void CalculatorInvalidOperationShouldThrow()
+    public void CalculatorNullOperationShouldThrow()
     {
         Calculator cal=new Calculator(0,0,null);
         Assert.Throws<ArgumentException>(() => { cal.Calculate(); });
