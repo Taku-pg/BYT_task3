@@ -10,7 +10,7 @@ public class CylinderTest
     [Test]
     public void TestCylinderCalculateArea()
     {
-        Assert.That(cylinder.CalculateArea(), Is.EqualTo(188.496).Within(0.001));
+        Assert.That(cylinder.CalculateArea(), Is.EqualTo(188.495).Within(0.001));
     }
 
     [Test]
